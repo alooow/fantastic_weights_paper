@@ -21,9 +21,9 @@
 ```
 pip install git+https://gitlab.com/awarelab/mrunner.git
 ```
-For instructions on how to install singularity see https://docs.sylabs.io/guides/3.0/user-guide/installation.html and chapter "With singularity, no mrunner (or mrunner locally) (Not Recommended)" below. 
-2. Prepare an experiment specification file (you can use any of the files in the `specs` directory as a reference. See `specs/README_experiments.md`) 
-3. Prepare a context definition which contains the information needed to run a job on a server. It uses slurm (https://slurm.schedmd.com/documentation.html)
+For instructions on how to install singularity see https://docs.sylabs.io/guides/3.0/user-guide/installation.html and chapter "With singularity, no mrunner (or mrunner locally) (Not Recommended)" below.    
+2. Prepare an experiment specification file (you can use any of the files in the `specs` directory as a reference. See `specs/README_experiments.md`)     
+3. Prepare a context definition which contains the information needed to run a job on a server. It uses slurm (https://slurm.schedmd.com/documentation.html)    
 To do so, create an `config.yaml` file with the following structure:
 ```
 contexts:
@@ -57,13 +57,13 @@ To run any of the scripts (see `specs/README_experiments.md`) use:
 mrunner --config config.yaml --context mycontext run specs/<spec_name>
 ```
 
-For Example:
+For example:
 
 ```
 mrunner --config config.yaml --context mycontext run specs/mlp/001c_dst.py 
 ```
 
-**Note** The command above will submit each of the 550 experiments specified by the grid in the `specs/mlp/001c_dst.py` file as a separate slurm job. The code will be copied to a separate folder created for each of the 550 jobs under the  `<storage_dir_on_host>/mrunner_scratch/weight_importance/<random-generated_string>/<random-generated_string>_<job_number>` path. It is therefore important not to store or copy large files from the local code. See `specs/README_experiments.md` for examples on how to exlude large files from copying and how to share the datasets by using an environmental variable. 
+**Note** The command above will submit each of the 550 experiments specified by the grid in the `specs/mlp/001c_dst.py` file as a separate slurm jobs. The code will be copied to a separate folder created for each of the 550 jobs under the  `<storage_dir_on_host>/mrunner_scratch/weight_importance/<random-generated_string>/<random-generated_string>_<job_number>` path. It is therefore important not to store or copy large files from the local code. See `specs/README_experiments.md` for examples on how to exlude large files from copying and how to share the datasets by using an environmental variable. 
 
 ### Without Singularity and Mrunner (Not Recommended)
 
