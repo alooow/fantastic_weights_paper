@@ -1,4 +1,4 @@
-# Weight Importance
+# Code for the Paper: *Fantastic Weights and How to Find Them: Where to Prune in Dynamic Sparse Training*
 
 
 ## Repo Structure
