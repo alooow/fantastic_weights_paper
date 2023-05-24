@@ -17,13 +17,10 @@
 
 ### With singularity and mrunner (recommened):
 
-1. Install singularity and mrunner:
-```
-pip install git+https://gitlab.com/awarelab/mrunner.git
-```
-For instructions on how to install singularity see https://docs.sylabs.io/guides/3.0/user-guide/installation.html and chapter "With singularity, no mrunner (or mrunner locally) (Not Recommended)" below.    
-2. Prepare an experiment specification file (you can use any of the files in the `specs` directory as a reference. See `specs/README_experiments.md`)     
-3. Prepare a context definition which contains the information needed to run a job on a server. It uses slurm (https://slurm.schedmd.com/documentation.html)    
+1. Install singularity and mrunner. To install mrunner run `pip install git+https://gitlab.com/awarelab/mrunner.git`. For instructions on how to install singularity see https://docs.sylabs.io/guides/3.0/user-guide/installation.html and chapter "With singularity, no mrunner (or mrunner locally) (Not Recommended)" below. 
+2. Download the ready-to-use singularity container: https://zenodo.org/record/7965582, or build it on your own, using the `singularity/sparse.def` file. For the latter, please refer to the "With singularity, no mrunner (or mrunner locally) (Not Recommended)" chapter. 
+3. Prepare an experiment specification file (you can use any of the files in the `specs` directory. See `specs/README_experiments.md`)     
+4. Prepare a context definition which contains the information needed to run a job on a server. It uses slurm (https://slurm.schedmd.com/documentation.html)    
 To do so, create an `config.yaml` file with the following structure:
 ```
 contexts:
