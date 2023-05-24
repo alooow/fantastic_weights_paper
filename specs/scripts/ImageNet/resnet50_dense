@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH -A <account name>
+#SBATCH -p <partition name>
+#SBATCH --mem-per-gpu=8G
+#SBATCH -N 1
+#SBATCH --cpus-per-gpu=9
+#SBATCH --gres=gpu:8
+#SBATCH --time 2880
+export IMAGENET_PYTORCH=~/ImageNet # set the path to the ImageNet here.
+python multiproc.py --nnodes 1 --nproc_per_node 8 imagenet_main.py --epochs 90 --opt_order after --master_port $1 --seed $2 --batch-size 32 --density 0.2 --update_frequency 800 --distributed true --use_wandb false --sparse false --fix true  --growth gradient  --workers 4 --tag "ImageNet" --save_dir "save/dense/$2/"
+
+
+
+
+
+
+

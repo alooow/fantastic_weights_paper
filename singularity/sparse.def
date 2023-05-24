@@ -1,0 +1,48 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%environment
+    export LANG=C.UTF-8
+    export LC_CTYPE=en_US.UTF-8
+    export LC_ALL=C.UTF-8
+
+%files
+    ./environment.yml /opt/environment.yml
+
+%post
+    # Run dpkg (behind other tools like apt-get) without interactive dialogue.
+    export DEBIAN_FRONTEND=noninteractive
+    # Developer settings (adjust to your needs)
+    export VENV_NAME=sparse
+
+    # Update and install basics.
+    apt-get -y update -q
+    apt upgrade -y
+    apt-get -y install wget
+    apt-get -y install gcc
+    apt-get -y install git
+    apt -y install g++
+    apt -y install cmake
+    apt -y install zlib1g-dev
+    apt -y install libopenmpi-dev
+
+    wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh -O ./miniconda.sh
+    bash ./miniconda.sh -b -p /miniconda
+
+    . /miniconda/etc/profile.d/conda.sh
+    conda env create -f /opt/environment.yml
+    conda activate ${VENV_NAME}
+
+    pip install --upgrade pip setuptools wheel
+    pip install git+https://gitlab.com/awarelab/mrunner.git
+    pip install wandb
+
+    # Activate conda enviornment in runtime
+    echo ". /miniconda/etc/profile.d/conda.sh" >>  $SINGULARITY_ENVIRONMENT
+    echo "conda activate ${VENV_NAME}" >>  $SINGULARITY_ENVIRONMENT
+
+    # Clean cache to reduce size of the image
+    apt clean
+    conda clean --all -y -q
+    rm -r $(pip cache dir)/*
+
