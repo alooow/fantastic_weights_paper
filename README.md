@@ -1,4 +1,6 @@
 # Code for the Paper: *Fantastic Weights and How to Find Them: Where to Prune in Dynamic Sparse Training*
+[Link to paper](https://arxiv.org/abs/2306.12230)
+
 
 
 ## Repo Structure
